@@ -1,4 +1,4 @@
-package DemoUsunac;
+package WzorceProj.DemoUsunac;
 
 public interface Shape {
     void draw();
