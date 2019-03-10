@@ -4,7 +4,9 @@ import org.apache.commons.math3.util.ArithmeticUtils;
 import org.apache.commons.math3.util.CombinatoricsUtils;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Methods {
     public int add(int a, int b) {
@@ -19,139 +21,61 @@ public class Methods {
         return a * b;
     }
 
+
     public static void main(String[] args) {
-        Methods methods = new Methods();
-        System.out.println(methods.divide(4, 2));
 
-        List list = Arrays.asList(2, 3, 4, 5, 6);
 
-        list.forEach(o -> System.out.print(o + ", "));
-        list.forEach(o -> System.out.println(o));
+        Set<Integer> set = new HashSet<>();
+        List<Integer> list = new ArrayList<>();
+
+        set.add(4);
+        set.add(45);
+        set.add(21);
+        set.add(-23);
+        set.add(2);
+
+
+
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(4,16);
+        map.put(3,9);
+        map.put(6,36);
+        map.put(5,25);
+        map.put(8,64);
+        map.put(2,4);
+
 
         System.out.println();
 
 
-        List<Integer> list2 = new ArrayList<>();
-        list2.add(4);
-        list2.add(5);
-        list2.add(3);
-        list2.add(11);
-        list2.add(2);
 
 
-        list2.stream().sorted().forEach(o -> System.out.println(o));
+// dodawanie kilku elementów do mapy
 
-        System.out.println();
+        Map map2 = map.entrySet()
+                .stream()
+//                .filter(o->o.getKey()>3).collect(Collectors.toMap(Function.identity(), o->( " "))); // syntax error
+                .filter(o->o.getKey()>3).collect(Collectors.toMap(Function.identity(), o->true)); // syntax error
 
-        List<String> names2 = Arrays.asList("John", "Sam", "Greg", "Ryan");
-        names2.stream()
-                .map(n -> new User(n)).forEach(System.out::println);
-
-        System.out.println(list2);
-
-        list.stream().map(o -> o).collect(Collectors.toList());
-
-
-        List<Integer> list1 = new ArrayList<>(Arrays.asList(34, 3, 2, 1));
-
-        List list3 = (List) list.stream().collect(Collectors.toList());
-        System.out.println(list3 + " abc");
-
-        List<String> letters = Arrays.asList("a", "b", "c", "d", "e", "f", "g");
-        String s = "";
-        for (String letter : letters) {
-            s += letter;
-        }
-        System.out.println(s);
-
-        String s2 = letters.stream().collect(Collectors.joining());
-        System.out.println(s2);
-
-        List<String> stringList = new ArrayList<>();
-        stringList.add("ab");
-        stringList.add("cd");
-        stringList.add("ef");
-        stringList.add("gh");
-
-        String s3 = stringList.stream().collect(Collectors.joining(", "));
-        System.out.println(s3);
-
-
-        list2.stream().map(o -> o * 2).forEach(o -> System.out.println(o));
-
-
-        List<String> names = Arrays.asList("Adam", "Brent",
-                "Andrew", "Carl", "Doug", "Alex");
-
-
-        ArrayList<String> namesWithA =
-                new ArrayList<>();
-
-        for (String name : names) {
-            if (name.startsWith("A")) {
-                namesWithA.add(name);
-            }
-        }
-        System.out.println(namesWithA);
-
-
-        List<String> namesWithA2 = names.stream().
-                filter(x -> x.startsWith("A")).collect(Collectors.toList());
-
-        System.out.println(namesWithA2);
-
-
-        List<String> words = new ArrayList<>();
-        words.add("abc");
-        words.add("bcd");
-        words.add("a");
-        words.add("avf");
-        words.add("f");
-
-        List list4 = words.stream().
-                filter(x -> x.startsWith("a") || x.endsWith("d"))
-                .collect(Collectors.toList());
-
-        List<String > stringList1 = words.stream().
-                filter(x->x.startsWith("a") || x.equalsIgnoreCase("bcd"))
-                .collect(Collectors.toList());
-        List<Integer> integers = new ArrayList<>();
-        integers.add(3);
-        integers.add(123);
-        integers.add(32);
-        integers.add(42);
-
-        List<Integer> list5 = integers.stream().map(o->o*2).collect(Collectors.toList());
-
-        List<Integer> integers1 = integers.stream().sorted().collect(Collectors.toList());
-        System.out.println(integers1);
-
-        List<Integer> integers2 = integers.parallelStream()
-                .filter(o-> o >22).sorted().
-                        collect(Collectors.toList());
-
-        List<Integer> integers3 = integers.parallelStream()
-                .filter(o-> o >22).sorted().
-                        collect(Collectors.toList());
-        boolean b= integers3.stream().anyMatch(o->o>5);
-        System.out.println(b);
+        System.out.println(map2);
+        System.out.println(map2.keySet());
+        System.out.println(map2.values());
 
 
 
-        System.out.println(integers2);
 
-//        Set<Integer> integers = new HashSet<>();
-//        integers.add(43);
-//        integers.add(22);
-//        integers.add(1);
-//        integers.add(22);
-//        integers.add(5);
-//        integers.add(51);
+
+//        System.out.println();
 //
-//        System.out.println(integers);
-
+//        List<Integer> integers = IntStream.
+//                rangeClosed(1,10).boxed().collect(Collectors.toList());
+//
+//
+//        integers.stream().map(x->x*x).
+//                filter(o->o%2==0 || o%3==0).forEach(s-> System.out.println(s));
 
     }
+
 
 
     static class User {
@@ -188,6 +112,10 @@ public class Methods {
 
     public Exception throwException() throws Exception {
         throw new Exception();
+    }
+
+    public static int addInStatic(int a, int b){
+        return a+b;
     }
 
 }
