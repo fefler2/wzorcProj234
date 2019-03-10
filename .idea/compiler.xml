@@ -9,8 +9,8 @@
         <module name="WzorceProjId" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="WzorceProjId" target="1.7" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="WzorceProjId" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -49,4 +49,9 @@ class MethodsTest {
         assertEquals(256,methods.powerOf(2,8));
     }
 
+    @Test
+    void throwException() throws Exception {
+//        assertThrows(Exception, ()->methods.divide(4,0));
+
+    }
 }
