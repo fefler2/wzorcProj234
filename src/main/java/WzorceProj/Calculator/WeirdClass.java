@@ -94,6 +94,7 @@ public class WeirdClass extends SuperClass {
         System.out.println((double) staticClass.a== (float) 44);
 
 
+
         for (; ; ) {
             ;
             ;
