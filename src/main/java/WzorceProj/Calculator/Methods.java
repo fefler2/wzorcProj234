@@ -115,6 +115,30 @@ public class Methods {
         List<String > stringList1 = words.stream().
                 filter(x->x.startsWith("a") || x.equalsIgnoreCase("bcd"))
                 .collect(Collectors.toList());
+        List<Integer> integers = new ArrayList<>();
+        integers.add(3);
+        integers.add(123);
+        integers.add(32);
+        integers.add(42);
+
+        List<Integer> list5 = integers.stream().map(o->o*2).collect(Collectors.toList());
+
+        List<Integer> integers1 = integers.stream().sorted().collect(Collectors.toList());
+        System.out.println(integers1);
+
+        List<Integer> integers2 = integers.parallelStream()
+                .filter(o-> o >22).sorted().
+                        collect(Collectors.toList());
+
+        List<Integer> integers3 = integers.parallelStream()
+                .filter(o-> o >22).sorted().
+                        collect(Collectors.toList());
+        boolean b= integers3.stream().anyMatch(o->o>5);
+        System.out.println(b);
+
+
+
+        System.out.println(integers2);
 
 //        Set<Integer> integers = new HashSet<>();
 //        integers.add(43);
