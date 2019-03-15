@@ -24,12 +24,24 @@ public class WeirdClass extends SuperClass {
 
         class InnerClassInInnerClass {
             double a = 11.2d;
+            static final float f = 4.f;
 
+            InnerClassInInnerClass(){
+
+            }
         }
     }
 
+
+
     static class StaticClass {
         static int a = 44;
+        int b;
+
+        StaticClass(){
+            b=44;
+        }
+
     }
 
     public static void main(String... args) {
@@ -91,7 +103,7 @@ public class WeirdClass extends SuperClass {
         }
 
         WeirdClass.StaticClass staticClass = new WeirdClass.StaticClass();
-        System.out.println((double) staticClass.a== (float) 44);
+        System.out.println((double) staticClass.a == (float) 44);
 
 
 

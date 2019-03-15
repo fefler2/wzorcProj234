@@ -21,6 +21,21 @@ public class Methods {
         return a * b;
     }
 
+    public int throwException2() throws Exception {
+        throw new Exception();
+    }
+
+    public double computerCircleArea(double radius) {
+        return 3.14 * radius * radius;
+    }
+
+    public int getD() {
+        return d;
+    }
+
+    private int d = 33;
+
+
 
     public static void main(String[] args) {
 
@@ -35,19 +50,16 @@ public class Methods {
         set.add(2);
 
 
-
         Map<Integer, Integer> map = new HashMap<>();
-        map.put(4,16);
-        map.put(3,9);
-        map.put(6,36);
-        map.put(5,25);
-        map.put(8,64);
-        map.put(2,4);
+        map.put(4, 16);
+        map.put(3, 9);
+        map.put(6, 36);
+        map.put(5, 25);
+        map.put(8, 64);
+        map.put(2, 4);
 
 
         System.out.println();
-
-
 
 
 // dodawanie kilku elementów do mapy
@@ -55,14 +67,11 @@ public class Methods {
         Map map2 = map.entrySet()
                 .stream()
 //                .filter(o->o.getKey()>3).collect(Collectors.toMap(Function.identity(), o->( " "))); // syntax error
-                .filter(o->o.getKey()>3).collect(Collectors.toMap(Function.identity(), o->true)); // syntax error
+                .filter(o -> o.getKey() > 3).collect(Collectors.toMap(Function.identity(), o -> true)); // syntax error
 
         System.out.println(map2);
         System.out.println(map2.keySet());
         System.out.println(map2.values());
-
-
-
 
 
 //        System.out.println();
@@ -75,7 +84,6 @@ public class Methods {
 //                filter(o->o%2==0 || o%3==0).forEach(s-> System.out.println(s));
 
     }
-
 
 
     static class User {
@@ -114,8 +122,8 @@ public class Methods {
         throw new Exception();
     }
 
-    public static int addInStatic(int a, int b){
-        return a+b;
+    public static int addInStatic(int a, int b) {
+        return a + b;
     }
 
 }
