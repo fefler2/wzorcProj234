@@ -1,16 +1,16 @@
 package WzorceProj.Calculator;
 
 import org.junit.Ignore;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.*;
 import org.junit.jupiter.api.function.Executable;
-import static org.junit.jupiter.api.Assumptions.*;
 
+import static org.junit.jupiter.api.Assumptions.*;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_METHOD)
 class MethodsTest {
 
     public int d = 44;
@@ -26,25 +26,45 @@ class MethodsTest {
 //
 
 
-    @Test
-    void add() {
-        assumeTrue(false);
-        assertEquals(33, methods.add(22, 11));
-        a = 11;
+    @Nested
+    @DisplayName("Add Test Class")
+    class AddTest{
+
+        @Test
+        void addPostive() {
+            assertEquals(33, methods.add(22, 11));
+        }
+
+        @Test
+        void addNegative() {
+            assertEquals(-23, methods.add(-19, -4));
+        }
 
     }
 
-
     @Test
+    @EnabledOnJre(JRE.JAVA_9)
+        // jest 8 wersja wiec nie failuje
     void subtract() {
         assertEquals(44, methods.subtract(55, 11));
         System.out.println(a);
+        fail();
     }
 
     @Test
     void multiple() {
-        a=22;
-        assertEquals(22, methods.multiple(2, 11));
+
+
+        assertAll(
+                () -> assertEquals(22, methods.multiple(2, 11)),
+                () -> assertEquals(0, methods.multiple(4,0)),
+                ()-> assertNotEquals(-3, methods.multiple(4,2))
+
+
+
+        );
+
+        assertAll("lol", ()-> assertTrue(methods.multiple(4,3)>5));
 
 
     }
@@ -52,6 +72,8 @@ class MethodsTest {
 
     @Test
     void divide() {
+        assumeTrue(false);
+        fail();
 
         assertEquals(3, methods.divide(9, 3));
         assertThrows(Exception.class, () -> methods.divide(1, 0));
@@ -78,7 +100,7 @@ class MethodsTest {
     }
 
     @Test
-    @Disabled
+//    @Disabled
     void addInStatic() {
         assertEquals(32, Methods.addInStatic(3, 29));
 
@@ -92,7 +114,7 @@ class MethodsTest {
     }
 
     @Test
-    void throwException2(){
+    void throwException2() {
         assertThrows(Exception.class, () -> methods.throwException2());
     }
 
