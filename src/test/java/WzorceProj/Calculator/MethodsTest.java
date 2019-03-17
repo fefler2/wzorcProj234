@@ -4,6 +4,10 @@ import org.junit.Ignore;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
 import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.*;
 
 import static org.junit.jupiter.api.Assumptions.*;
 
@@ -27,13 +31,71 @@ class MethodsTest {
         this.testInfo = testInfo;
         this.testReporter = testReporter;
         methods = new Methods();
+
+        if (testInfo.getTags().equals("Math")) {
+
+            testReporter.publishEntry("Running " + testInfo.getDisplayName() + " with tags " +
+                    testInfo.getTags());
+        }
+
+//        testReporter.publishEntry("Running " + testInfo.getDisplayName() + " with tags " +
+//                testInfo.getTags());
+    }
+
+    @Test
+    void addStat() {
+        assertEquals(7, Methods.addStat(4, 3));
+    }
+
+    @Test
+    void isOdd() {
+        assertTrue(Methods.isOdd(5));
+
+        assertTrue(Methods.isOdd(3));
+
+        assertTrue(Methods.isOdd(9));
+
+        List list = new ArrayList();
+        list.add(4);
+        list.add(33);
+        list.add(22);
+        List list2 = list;
+        List list3 = new ArrayList();
+        list3.add(4);
+        list3.add(33);
+        list3.add(22);
+
+        assertEquals(list, list3);
+
+        Map map = new HashMap();
+        map.put(7,33);
+        map.put(4,22);
+        map.put(2,3);
+
+        Map map2 = new HashMap();
+        map2.put(7,33);
+        map2.put(4,22);
+        map2.put(2,3);
+
+        assertEquals(map, map2);
+//        assertSame(list, list3);
+//        assertArrayEquals(list, list);
+
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {3, 5, 1, 99, 53, -43})
+    void isOddParametrizedTest(int n) {
+
+        assertTrue(Methods.isOdd(n));
+
     }
 //
 
 
     @Nested
     @DisplayName("Add Test Class")
-    class AddTest{
+    class AddTest {
 
         @Test
         @Tag("Math")
@@ -48,6 +110,7 @@ class MethodsTest {
 
     }
 
+
     @Test
     @EnabledOnJre(JRE.JAVA_9)
         // jest 8 wersja wiec nie failuje
@@ -61,19 +124,19 @@ class MethodsTest {
     @Tag("Math")
     void multiple() {
 
-        System.out.println("Runniong " + testInfo.getDisplayName() + " with tags " +
-        testInfo.getTags());
+
+        testReporter.publishEntry("Running " + testInfo.getDisplayName() + " with tags " +
+                testInfo.getTags());
 
         assertAll(
                 () -> assertEquals(22, methods.multiple(2, 11)),
-                () -> assertEquals(0, methods.multiple(4,0)),
-                ()-> assertNotEquals(-3, methods.multiple(4,2))
-
+                () -> assertEquals(0, methods.multiple(4, 0)),
+                () -> assertNotEquals(-3, methods.multiple(4, 2))
 
 
         );
 
-        assertAll("lol", ()-> assertTrue(methods.multiple(4,3)>5));
+        assertAll("lol", () -> assertTrue(methods.multiple(4, 3) > 5));
 
 
     }
@@ -131,10 +194,6 @@ class MethodsTest {
     void throwException2() {
         assertThrows(Exception.class, () -> methods.throwException2());
     }
-
-
-
-
 
 
 }

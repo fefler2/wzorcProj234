@@ -36,6 +36,13 @@ public class Methods {
     private int d = 33;
 
 
+    public static boolean isOdd(int a) {
+        return a % 2 != 0;
+    }
+
+    public static int addStat(int a, int b) {
+        return a + b;
+    }
 
     public static void main(String[] args) {
 
