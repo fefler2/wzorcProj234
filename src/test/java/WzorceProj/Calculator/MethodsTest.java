@@ -19,8 +19,13 @@ class MethodsTest {
 
     int a = 33;
 
+    TestInfo testInfo;
+    TestReporter testReporter;
+
     @BeforeEach
-    void init() {
+    void init(TestInfo testInfo, TestReporter testReporter) {
+        this.testInfo = testInfo;
+        this.testReporter = testReporter;
         methods = new Methods();
     }
 //
@@ -31,6 +36,7 @@ class MethodsTest {
     class AddTest{
 
         @Test
+        @Tag("Math")
         void addPostive() {
             assertEquals(33, methods.add(22, 11));
         }
@@ -48,12 +54,15 @@ class MethodsTest {
     void subtract() {
         assertEquals(44, methods.subtract(55, 11));
         System.out.println(a);
-        fail();
+//        fail();
     }
 
     @Test
+    @Tag("Math")
     void multiple() {
 
+        System.out.println("Runniong " + testInfo.getDisplayName() + " with tags " +
+        testInfo.getTags());
 
         assertAll(
                 () -> assertEquals(22, methods.multiple(2, 11)),
@@ -71,9 +80,11 @@ class MethodsTest {
 
 
     @Test
+
+    @Tag("Math")
     void divide() {
-        assumeTrue(false);
-        fail();
+//        assumeTrue(false);
+//        fail();
 
         assertEquals(3, methods.divide(9, 3));
         assertThrows(Exception.class, () -> methods.divide(1, 0));
@@ -83,11 +94,13 @@ class MethodsTest {
     }
 
     @Test
+    @Tag("Math-advanced")
     void factorial() {
         assertEquals(120, methods.factorial(5), "Should be factorial result");
     }
 
     @Test
+    @Tag("Math-advanced")
     void powerOf() {
         assertEquals(256, methods.powerOf(2, 8));
     }
@@ -106,10 +119,11 @@ class MethodsTest {
 
     }
 
-    @Test
+    @RepeatedTest(1)
     void computerCircleArea() {
         assertEquals(314, methods.computerCircleArea
                 (10), "Should return circle area");
+
 
     }
 
@@ -117,5 +131,10 @@ class MethodsTest {
     void throwException2() {
         assertThrows(Exception.class, () -> methods.throwException2());
     }
+
+
+
+
+
 
 }
